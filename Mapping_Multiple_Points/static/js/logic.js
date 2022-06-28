@@ -22,7 +22,7 @@ streets.addTo(map);
     //     radius: 300
     //  }).addTo(map);
 
-// An array containing each city's location, state, and population.
+// An array containing each city's location, state, and population. 
 
 // Get data from cities.js
   let cityData = cities;
