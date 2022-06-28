@@ -22,12 +22,12 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 // Create a base layer that holds both maps.
 let baseMaps = {
   "Streets": streets,
-  "Satellite Street": satelliteStreets
+  "Satellite ": satelliteStreets
 };
 
 let map = L.map('mapid', {
-  center: [43.7, -79.3],
-  zoom: 11,
+  center: [39.5, -98.5],
+  zoom: 3,
   layers: [streets]
 })
 
@@ -35,30 +35,34 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
-let torontoHoods = "https://raw.githubusercontent.com/biboking/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
+let earthquakes7days = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 
-// Create a style for the lines.
-let myStyle = {
-  color: "blue",
-  fillColor: "yellow",
-  weight: 1
-}
+// // Create a style for the lines.
+// let myStyle = {
+//   color: "blue",
+//   fillColor: "yellow",
+//   weight: 1
+// }
 
-// Grabbing our GeoJSON data.
-d3.json(torontoHoods).then(function(data) {
-  console.log(data);
-
-// Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data, {
-  style: myStyle,
-  onEachFeature: function(feature,layer){
-    console.log(layer);
-    layer.bindPopup("<h4> Neighborhood: " + feature.properties.AREA_NAME +"</h4>");
-      }
-}).addTo(map);
-
+// Retrieve the earthquake GeoJSON data.
+d3.json(earthquakes7days).then(function(data) {
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJSON(data).addTo(map);
 });
+// d3.json(torontoHoods).then(function(data) {
+//   console.log(data);
+
+// // Creating a GeoJSON layer with the retrieved data.
+// L.geoJson(data, {
+//   style: myStyle,
+//   onEachFeature: function(feature,layer){
+//     console.log(layer);
+//     layer.bindPopup("<h4> Neighborhood: " + feature.properties.AREA_NAME +"</h4>");
+//       }
+// }).addTo(map);
+
+// });
 
 
 
