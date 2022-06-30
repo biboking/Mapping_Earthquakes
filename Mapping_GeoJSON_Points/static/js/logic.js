@@ -21,8 +21,8 @@ let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-  Street: streets,
-  Dark: dark
+  "Street": streets,
+  "Dark": dark
 };
 
 let map = L.map('mapid', {
@@ -40,8 +40,13 @@ let airportData = "https://raw.githubusercontent.com/biboking/Mapping_Earthquake
 // Grabbing our GeoJSON data.
 d3.json(airportData).then(function(data) {
   console.log(data);
-  // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data)
-  .bindPopup("<h2>Airport Code: " + data.features[0].properties.faa + "</h2> <hr> <h2>Airport name: " + data.features[0].properties.name+ "</h3>")
+  // Creating a GeoJSON layer with the retrieved data. 
+  L.geoJSON(data, {
+    onEachFeature: function(feature,layer){
+      console.log(layer);
+      layer.bindPopup("<h2>Airport Code: " + feature.properties.faa + "</h2> <hr> <h2>Airport name: " + feature.properties.name+ "</h3>");
+        }
+  
+  })
   .addTo(map);
   });
