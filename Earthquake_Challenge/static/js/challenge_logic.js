@@ -145,10 +145,10 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
       return "#ea2c2c";
     }
     if (magnitude > 5) {
-      return "#ea822c";
+      return "#ea2c2c";
     }
     if (magnitude > 0) {
-      return "#d4ee00";
+      return "#ea822c";
     }
   }
 
@@ -217,7 +217,7 @@ legend.onAdd = function() {
   d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
     console.log(data);
     L.geoJson(data, {
-      style: {color: "orange", weight: 2}
+      style: {color: "#ab4d16", weight: 2}
     })
     .addTo(tectonicPlates)
     
